@@ -1,0 +1,14 @@
+services:
+  generator:
+    build: ./generator
+    ports:
+      - "5000:5000"
+  invoker:
+    build: ./invoker
+    links: 
+      - "redis:redis"
+      - "generator:generator" 
+    ports:
+      - "5001:5000"
+  redis:
+    image: "redis:alpine"
